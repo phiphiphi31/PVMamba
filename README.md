@@ -1,24 +1,32 @@
-# PVMamba: Parallelizing Vision Mamba via Dynamic State Aggregation
+# PVMamba
+
+The official implementation of the paper:
+
+**PVMamba: Parallelizing Vision Mamba via Dynamic State Aggregation**
+>  Fei Xie, Zhongdao Wang, Weijia Zhang, Chao Ma
 
 If you have any questions, please don't hesitate to contact me  (jaffe031@sjtu.edu.cn). 
+
+You can also refer to this GitHub repository: [PVMamba](https://github.com/phiphiphi31/PVMamba).
 
 ## To Do List
 
 - [x] 2025.06 PVMamba is accepted by ICCV.
-- [x] 2025.06 Enhance PVMamba by [DCNv4](https://arxiv.org/pdf/2211.05778) operator!
+- [x] 2025.06 Release the code for image classification.
+- [ ] Enhance PVMamba by [DCNv4](https://arxiv.org/pdf/2211.05778) operator!
 - [ ] Publish the paper. 
-- [ ] Release the raw code. 
+- [ ] Release the full code. 
 
 
-## Introduction of PVMamba
+## 📜 Introduction 
 
 <p align="center">
 <img src="assets/pvmamba1.png", width="90%">
 </p>
 
-Mamba, an architecture with RNN-like sequence modeling of State Space Model (SSM), has demonstrated promising capabilities in long-range modeling with high efficiency. However, Mamba models struggle with structured 2D visual data using sequential computing, thereby lagging behind their attention-based counterparts. In this paper, we propose a Parallel Vision Mamba (PVMamba), a novel SSM architecture tailored for visual data. PVMamba encompasses two key designs: 1) Based on the sparsity and adjacency of visual signals, we parallelize the sequential computing through three core steps, termed Dynamic State Aggregation (DSA), i.e., parallelization, alignment, and aggregation. DSA generates the hidden state in SSM by a feasible spatial aggregation, thereby overcoming the inherent sequential constraints. 2) Along with maintaining linear computational complexity, we apply a dynamic operator to learn the spatial samplings for each hidden state. To further boost the local modeling capability, we restrict the dynamic operator to the neighboring pixels in shallow layers. We also devise a layer multiplexing technique to stabilize the training and reduce the learning redundancy. PVMamba is a versatile backbone network with dynamic operators for various vision tasks, such as image classification and dense prediction.
+Mamba, an architecture with RNN-like sequence modeling of the State Space Model (SSM), has demonstrated promising capabilities in long-range modeling with high efficiency. However, Mamba models struggle with structured 2D visual data using sequential computing, thereby lagging behind their attention-based counterparts. In this paper, we propose Parallel Vision Mamba (PVMamba), a novel SSM architecture specifically designed for visual data. PVMamba encompasses two key designs: 1) Based on the sparsity and adjacency of visual signals, we parallelize the sequential computing through three core steps, termed Dynamic State Aggregation (DSA), i.e., parallelization, alignment, and aggregation. DSA generates the hidden state in SSM by a feasible spatial aggregation, thereby overcoming the inherent sequential constraints. 2) In addition to maintaining linear computational complexity, we apply a dynamic operator to learn the spatial samplings for each hidden state. To further boost the local modeling capability, we restrict the dynamic operator to the neighboring pixels in shallow layers. We also devise a layer multiplexing technique to stabilize the training and reduce the learning redundancy. PVMamba is a versatile backbone network with dynamic operators for various vision tasks, such as image classification and dense prediction.
 
-## Getting Started
+## 🕹️ SGetting Started
 
 ### Installation
 
@@ -27,24 +35,24 @@ The installation tips can also be referred to [VMamba](https://github.com/MzeroM
 **Environment Setup:**
 
 VMamba recommends setting up a conda environment and installing dependencies via pip. Use the following commands to set up your environment:
-Also, We recommend using the pytorch>=2.0, cuda>=11.8. But lower version of pytorch and CUDA are also supported.
+Additionally, we recommend using PyTorch >=2.0, CUDA >=11.8. But a lower version of PyTorch and CUDA is also supported.
 
 ***Create and activate a new conda environment***
 
 ```bash
-conda create -n quadmamba
-conda activate quadmamba
+conda create -n pvmamba
+conda activate pvmamba
 ```
 
 ***Install Dependencies***
 
-for SSM library, please do as follows:
+For the SSM library, please do as follows:
 
 ```bash
 pip install -r requirements.txt
 cd kernels/selective_scan && pip install .
 ```
-For DCNv4 library, please do as follows:
+For the DCNv4 library, please do as follows:
 
 ```bash
 cd kernels
@@ -64,7 +72,7 @@ pip install mmdet==3.3.0 mmsegmentation==1.2.2 mmpretrain==1.2.0
 
 **Classification**
 
-To train QuadMamba models for classification on ImageNet, use the following commands for different configurations:
+To train PVMamba models for classification on ImageNet, use the following commands for different configurations. Add --mesa if you want to use mesa training. 
 
 ```bash
 python -m torch.distributed.launch --nnodes=1 --node_rank=0 --nproc_per_node=8 --master_addr="127.0.0.1" --master_port=29501 main.py --cfg </path/to/config> --batch-size 128 --data-path </path/of/dataset> --output /tmp
@@ -82,9 +90,9 @@ To train with `mmdetection` or `mmsegmentation`:
 bash ./tools/dist_train.sh </path/to/config> 8
 ```
 
-## Citation
+## 🤗 Citation
 
-If you find it useful, please consider to cite the paper, thanks!
+If you find this paper useful, please consider citing it. Thanks!
 
 ```
 
@@ -97,8 +105,8 @@ If you find it useful, please consider to cite the paper, thanks!
 
 ```
 
-## Acknowledgment
+## ❤️ Acknowledgment
 
-This project is based on [VMamba](https://github.com/MzeroMiko/VMamba/tree/main) and [DCNv4](https://arxiv.org/pdf/2211.05778). Thanks for their great work!
+This project is based on [VMamba](https://github.com/MzeroMiko/VMamba/tree/main), [VSSD](https://arxiv.org/pdf/2407.18559), [Mamba2](https://arxiv.org/abs/2405.21060) and [DCNv4](https://arxiv.org/pdf/2211.05778). Thanks for their great work!
 
 
