@@ -5,13 +5,12 @@ The official implementation of the paper:
 **PVMamba: Parallelizing Vision Mamba via Dynamic State Aggregation**
 >  Fei Xie, Zhongdao Wang, Weijia Zhang, Chao Ma
 
-If you have any questions, please don't hesitate to contact me  (jaffe031@sjtu.edu.cn). 
+> If you have any questions, please don't hesitate to contact me  (jaffe031@sjtu.edu.cn). 
 
-You can also refer to this GitHub repository: [PVMamba](https://github.com/phiphiphi31/PVMamba).
 
 ## To Do List
 
-- [x] 2025.06 PVMamba is accepted by ICCV.
+- [x] 2025.06 PVMamba is accepted by ICCV2025.
 - [x] 2025.06 Release the code for image classification.
 - [ ] Enhance PVMamba by [DCNv4](https://arxiv.org/pdf/2211.05778) operator!
 - [ ] Publish the paper. 
@@ -68,7 +67,7 @@ pip install mmengine==0.10.1 mmcv==2.1.0 opencv-python-headless ftfy regex
 pip install mmdet==3.3.0 mmsegmentation==1.2.2 mmpretrain==1.2.0
 ```
 
-### Model Training and Inference
+### 📋 Model Training and Inference
 
 **Classification**
 
